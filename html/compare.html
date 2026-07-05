@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceIQ - Platform Comparison</title>
+
+  <!-- CSS: go UP one folder to find style.css -->
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="brand">Freelance<span>IQ</span></div>
+    <a class="tab" href="home.html">Home</a>
+    <a class="tab" href="calculator.html">Calculators</a>
+    <a class="tab" href="expense.html">Expenses</a>
+    <a class="tab" href="dashboard.html">Dashboard</a>
+    <a class="tab" href="invoice.html">Invoice</a>
+    <a class="tab active" href="compare.html">Compare</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <div class="page-title">Platform Comparison Tool</div>
+    <div class="page-sub">
+      Enter a project value to see which platform pays the most
+    </div>
+
+    <!-- INPUT CARD -->
+    <div class="card">
+      <div class="grid-2">
+
+        <!-- id="cmp-amount" — JS reads this value -->
+        <div class="field">
+          <label>Project Value</label>
+          <input type="number"
+                 id="cmp-amount"
+                 placeholder="50000"
+                 value="50000">
+        </div>
+
+        <!-- id="cmp-currency" — JS reads this value -->
+        <div class="field">
+          <label>Currency</label>
+          <select id="cmp-currency">
+            <option>PKR</option>
+            <option>USD</option>
+            <option>GBP</option>
+            <option>EUR</option>
+            <option>AED</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- onclick calls calculateComparison() in compare.js -->
+      <button class="btn" onclick="calculateComparison()">
+        Compare Platforms
+      </button>
+    </div>
+
+    <!-- RESULTS SECTION -->
+    <!-- id="compare-result" starts hidden -->
+    <!-- JS removes "hidden" class to show it -->
+    <div id="compare-result" class="hidden">
+
+      <div class="grid-3">
+
+        <!-- FIVERR CARD -->
+        <!-- id="cmp-fiverr" — JS adds "best" class here -->
+        <div class="compare-card" id="cmp-fiverr">
+          <div class="c-name">Fiverr</div>
+          <div class="c-fee">20% commission</div>
+          <!-- id="cmp-f-net" — JS fills this with amount -->
+          <div class="c-net" id="cmp-f-net">—</div>
+          <!-- id="cmp-f-lost" — JS fills this with deduction -->
+          <div class="c-lost" id="cmp-f-lost">—</div>
+        </div>
+
+        <!-- UPWORK CARD -->
+        <!-- id="cmp-upwork" — JS adds "best" class here -->
+        <div class="compare-card" id="cmp-upwork">
+          <div class="c-name">Upwork</div>
+          <div class="c-fee">10% commission</div>
+          <!-- id="cmp-u-net" — JS fills this with amount -->
+          <div class="c-net" id="cmp-u-net">—</div>
+          <!-- id="cmp-u-lost" — JS fills this with deduction -->
+          <div class="c-lost" id="cmp-u-lost">—</div>
+        </div>
+
+        <!-- DIRECT CLIENT CARD -->
+        <!-- id="cmp-direct" — JS adds "best" class here -->
+        <div class="compare-card" id="cmp-direct">
+          <div class="c-name">Direct Client</div>
+          <div class="c-fee">0% commission</div>
+          <!-- id="cmp-d-net" — JS fills this with amount -->
+          <div class="c-net" id="cmp-d-net">—</div>
+          <!-- id="cmp-d-lost" — JS fills this -->
+          <div class="c-lost" id="cmp-d-lost">—</div>
+        </div>
+
+      </div>
+
+      <!-- id="cmp-advice" — JS puts advice text here -->
+      <div id="cmp-advice"
+           style="font-size:13px;
+                  color:#555;
+                  text-align:center;
+                  margin-top:14px;
+                  padding:14px;
+                  background:#f8faf9;
+                  border-radius:10px;">
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JS LINK: go UP one folder then into JavaScript folder -->
+  <script src="../javascript/compare.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceIQ - Combined Dashboard</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand">Freelance<span>IQ</span></div>
+    <a class="tab" href="home.html">Home</a>
+    <a class="tab" href="calculator.html">Calculators</a>
+    <a class="tab" href="expense.html">Expenses</a>
+    <a class="tab active" href="dashboard.html">Dashboard</a>
+    <a class="tab" href="invoice.html">Invoice</a>
+    <a class="tab" href="compare.html">Compare</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <div class="page-title">Combined Financial Dashboard</div>
+    <div class="page-sub">
+      Your real net income after business AND personal expenses
+    </div>
+
+    <div class="card">
+      <div class="card-title">Enter your monthly figures</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Monthly Freelance Income</label>
+          <input type="number" id="d-income" value="45000">
+        </div>
+        <div class="field">
+          <label>Total Business Costs</label>
+          <input type="number" id="d-bizexp" value="5000">
+        </div>
+        <div class="field">
+          <label>Tax Rate %</label>
+          <input type="number" id="d-taxrate" value="10">
+        </div>
+        <div class="field">
+          <label>Total House Expenses</label>
+          <input type="number" id="d-house" value="49500">
+        </div>
+      </div>
+      <button class="btn" onclick="calculateDashboard()">
+        Calculate Real Net Income
+      </button>
+    </div>
+
+    <div id="dash-result" class="hidden">
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="m-label">Gross Income</div>
+          <div class="m-value green" id="d-r-gross">—</div>
+        </div>
+        <div class="metric">
+          <div class="m-label">Business Costs</div>
+          <div class="m-value red" id="d-r-biz">—</div>
+        </div>
+        <div class="metric">
+          <div class="m-label">Tax</div>
+          <div class="m-value red" id="d-r-tax">—</div>
+        </div>
+        <div class="metric">
+          <div class="m-label">House Expenses</div>
+          <div class="m-value red" id="d-r-house">—</div>
+        </div>
+      </div>
+
+      <div class="card" style="text-align:center; padding:32px;">
+        <div style="font-size:13px; color:#888; margin-bottom:10px;">
+          Real Net Income After Everything
+        </div>
+        <div style="font-size:38px; font-weight:800;" id="d-r-net">
+          —
+        </div>
+        <div style="font-size:13px; margin-top:10px;" id="d-r-msg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+<script src="../javascript/dashboard.js"></script>
+  <!-- <script> 
+    function calculateDashboard() {
+      var income  = parseFloat(document.getElementById('d-income').value)  || 0;
+      var bizExp  = parseFloat(document.getElementById('d-bizexp').value)  || 0;
+      var taxRate = parseFloat(document.getElementById('d-taxrate').value) || 0;
+      var house   = parseFloat(document.getElementById('d-house').value)   || 0;
+
+      var taxAmt  = income * taxRate / 100;
+      var realNet = income - bizExp - taxAmt - house;
+
+      function fmt(n) {
+        return 'PKR ' + Math.round(n).toLocaleString();
+      }
+
+      document.getElementById('d-r-gross').textContent = fmt(income);
+      document.getElementById('d-r-biz').textContent   = '- ' + fmt(bizExp);
+      document.getElementById('d-r-tax').textContent   = '- ' + fmt(taxAmt);
+      document.getElementById('d-r-house').textContent = '- ' + fmt(house);
+
+      var netEl = document.getElementById('d-r-net');
+      netEl.textContent = fmt(realNet);
+      netEl.style.color = realNet >= 0 ? '#1D9E75' : '#D85A30';
+
+      var msg = document.getElementById('d-r-msg');
+      if (realNet >= 0) {
+        msg.textContent = '✓ Positive! You earn more than you spend.';
+        msg.style.color = '#1D9E75';
+      } else {
+        msg.textContent = '⚠ Warning: Expenses exceed income!';
+        msg.style.color = '#D85A30';
+      }
+
+      document.getElementById('dash-result').classList.remove('hidden');
+    }
+  </script>-->
+
+</body>
+</html>

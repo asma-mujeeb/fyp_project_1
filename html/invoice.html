@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceIQ - Invoice Generator</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand">Freelance<span>IQ</span></div>
+    <a class="tab" href="home.html">Home</a>
+    <a class="tab" href="calculator.html">Calculators</a>
+    <a class="tab" href="expense.html">Expenses</a>
+    <a class="tab" href="dashboard.html">Dashboard</a>
+    <a class="tab active" href="invoice.html">Invoice</a>
+    <a class="tab" href="compare.html">Compare</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <div class="page-title">Invoice Generator</div>
+    <div class="page-sub">Fill in the form → see live preview</div>
+
+    <div class="grid-2">
+
+      <!-- Form -->
+      <div class="card">
+        <div class="card-title">Invoice Details</div>
+        <div class="field">
+          <label>Your Name / Business</label>
+          <input type="text" id="inv-from" value="Sadia Naz">
+        </div>
+        <div class="field">
+          <label>Client Name</label>
+          <input type="text" id="inv-to" value="ABC Company">
+        </div>
+        <div class="field">
+          <label>Service Description</label>
+          <input type="text" id="inv-service" value="Logo Design">
+        </div>
+        <div class="field">
+          <label>Invoice Date</label>
+          <input type="date" id="inv-date">
+        </div>
+        <div class="field">
+          <label>Currency</label>
+          <select id="inv-currency">
+            <option>PKR</option><option>USD</option>
+            <option>GBP</option><option>EUR</option>
+            <option>AED</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Amount</label>
+          <input type="number" id="inv-amount" value="25000">
+        </div>
+        <div class="field">
+          <label>Tax % (0 if none)</label>
+          <input type="number" id="inv-tax" value="0">
+        </div>
+        <button class="btn" onclick="previewInvoice()">
+          Preview Invoice
+        </button>
+      </div>
+
+      <!-- Preview -->
+      <div id="invoice-preview" class="invoice-box hidden">
+        <div class="inv-head">
+          <div>
+            <div class="inv-brand">INVOICE</div>
+            <div style="font-size:12px;color:#999;margin-top:5px;"
+                 id="p-date">—</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:15px;font-weight:700;" id="p-from">
+              —
+            </div>
+            <div style="font-size:12px;color:#888;">Freelancer</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#999;margin-bottom:4px;">
+          Billed to:
+        </div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:18px;"
+             id="p-to">—</div>
+        <table class="inv-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th style="text-align:right;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="p-service">—</td>
+              <td style="text-align:right;" id="p-subtotal">—</td>
+            </tr>
+            <tr id="p-tax-row">
+              <td id="p-tax-label" style="color:#999;">—</td>
+              <td style="text-align:right;color:#999;"
+                  id="p-tax-val">—</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="inv-total" id="p-total">—</div>
+      </div>
+
+    </div>
+  </div>
+<script src="../javascript/invoice.js"></script>
+  <!-- <script>
+    function previewInvoice() {
+      var from     = document.getElementById('inv-from').value    || 'Freelancer';
+      var to       = document.getElementById('inv-to').value      || 'Client';
+      var service  = document.getElementById('inv-service').value || 'Service';
+      var date     = document.getElementById('inv-date').value    || '';
+      var currency = document.getElementById('inv-currency').value;
+      var amount   = parseFloat(document.getElementById('inv-amount').value) || 0;
+      var taxRate  = parseFloat(document.getElementById('inv-tax').value)    || 0;
+
+      var taxAmt = amount * taxRate / 100;
+      var total  = amount + taxAmt;
+
+      function fmt(n) {
+        return currency + ' ' + Math.round(n).toLocaleString();
+      }
+
+      document.getElementById('p-from').textContent     = from;
+      document.getElementById('p-to').textContent       = to;
+      document.getElementById('p-date').textContent     = 'Date: ' + date;
+      document.getElementById('p-service').textContent  = service;
+      document.getElementById('p-subtotal').textContent = fmt(amount);
+      document.getElementById('p-total').textContent    = 'Total: ' + fmt(total);
+
+      var taxRow = document.getElementById('p-tax-row');
+      if (taxRate > 0) {
+        taxRow.style.display = '';
+        document.getElementById('p-tax-label').textContent =
+          'Tax (' + taxRate + '%)';
+        document.getElementById('p-tax-val').textContent = fmt(taxAmt);
+      } else {
+        taxRow.style.display = 'none';
+      }
+
+      document.getElementById('invoice-preview').classList.remove('hidden');
+    }
+
+    document.getElementById('inv-date').value =
+      new Date().toISOString().split('T')[0];
+  </script>-->
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceIQ - Profession Calculators</title>
+
+  <!-- CSS link — goes UP one folder to find style.css -->
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="brand">Freelance<span>IQ</span></div>
+    <a class="tab" href="home.html">Home</a>
+    <a class="tab active" href="calculator.html">Calculators</a>
+    <a class="tab" href="expense.html">Expenses</a>
+    <a class="tab" href="dashboard.html">Dashboard</a>
+    <a class="tab" href="invoice.html">Invoice</a>
+    <a class="tab" href="compare.html">Compare</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <div class="page-title">Profession Calculators</div>
+    <div class="page-sub">
+      Select your profession → enter values → click Calculate
+    </div>
+
+    <!-- 11 PROFESSION BUTTONS -->
+    <!-- onclick calls selectProfession() in calculator.js -->
+    <div class="prof-grid">
+      <div class="prof-btn active"
+           onclick="selectProfession('Digital Marketing', this)">
+        Digital Marketing
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('TikTok Shop', this)">
+        TikTok Shop
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Video Editing', this)">
+        Video Editing
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Audio Editing', this)">
+        Audio Editing
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Graphic Design', this)">
+        Graphic Design
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Content Writing', this)">
+        Content Writing
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Social Media', this)">
+        Social Media
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Web Development', this)">
+        Web Development
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('Photography', this)">
+        Photography
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('E-Commerce', this)">
+        E-Commerce
+      </div>
+      <div class="prof-btn"
+           onclick="selectProfession('SEO', this)">
+        SEO
+      </div>
+    </div>
+
+    <div class="card">
+
+      <!-- This heading changes when profession is selected -->
+      <!-- id="calc-title" is targeted by selectProfession() -->
+      <div class="card-title" id="calc-title">
+        Digital Marketing Calculator
+      </div>
+
+      <div class="grid-2">
+
+        <!-- LEFT SIDE: INPUT FIELDS -->
+        <!-- IMPORTANT: every id here must exactly match -->
+        <!-- what calculator.js looks for -->
+        <div>
+
+          <!-- id="calc-currency" -->
+          <div class="field">
+            <label>Currency</label>
+            <select id="calc-currency">
+              <option>PKR</option>
+              <option>USD</option>
+              <option>GBP</option>
+              <option>EUR</option>
+              <option>AED</option>
+            </select>
+          </div>
+
+          <!-- id="c-income" -->
+          <div class="field">
+            <label>Gross Project Income</label>
+            <input type="number"
+                   id="c-income"
+                   placeholder="50000"
+                   value="50000">
+          </div>
+
+          <!-- id="c-platform" -->
+          <div class="field">
+            <label>Platform Fee % (Fiverr=20, Upwork=10)</label>
+            <input type="number"
+                   id="c-platform"
+                   placeholder="20"
+                   value="20">
+          </div>
+
+          <!-- id="c-software" -->
+          <div class="field">
+            <label>Software / Tools Cost</label>
+            <input type="number"
+                   id="c-software"
+                   placeholder="2000"
+                   value="2000">
+          </div>
+
+          <!-- id="extra-label" changes based on profession -->
+          <!-- id="c-extra" -->
+          <div class="field">
+            <label id="extra-label">Ad Spend / Other Cost</label>
+            <input type="number"
+                   id="c-extra"
+                   placeholder="3000"
+                   value="3000">
+          </div>
+
+          <!-- id="c-taxrate" -->
+          <div class="field">
+            <label>Tax Rate %</label>
+            <input type="number"
+                   id="c-taxrate"
+                   placeholder="10"
+                   value="10">
+          </div>
+
+          <!-- onclick calls calculateProfit() in calculator.js -->
+          <button class="btn" onclick="calculateProfit()">
+            Calculate Net Profit
+          </button>
+
+        </div>
+
+        <!-- RIGHT SIDE: RESULT BOX -->
+        <!-- These spans are filled by calculateProfit() -->
+        <!-- Every id here must exactly match calculator.js -->
+        <div class="result-box" style="align-self: start;">
+
+          <!-- id="r-gross" -->
+          <div class="result-row">
+            <span class="lbl">Gross Income</span>
+            <span id="r-gross">—</span>
+          </div>
+
+          <!-- id="r-platform" -->
+          <div class="result-row">
+            <span class="lbl">Platform Fee</span>
+            <span id="r-platform">—</span>
+          </div>
+
+          <!-- id="r-software" -->
+          <div class="result-row">
+            <span class="lbl">Software / Tools</span>
+            <span id="r-software">—</span>
+          </div>
+
+          <!-- id="r-extra" -->
+          <div class="result-row">
+            <span class="lbl">Extra Cost</span>
+            <span id="r-extra">—</span>
+          </div>
+
+          <!-- id="r-tax" -->
+          <div class="result-row">
+            <span class="lbl">Tax</span>
+            <span id="r-tax">—</span>
+          </div>
+
+          <!-- id="r-net" — colored green or red by JS -->
+          <div class="result-row">
+            <span class="lbl">Net Profit</span>
+            <span id="r-net" style="font-size:17px;">—</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT LINK -->
+  <!-- Goes UP one folder then into JavaScript folder -->
+  <script src="../javascript/calculator.js"></script>
+
+</body>
+</html>

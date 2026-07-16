@@ -5,6 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreelanceIQ - Invoice Generator</title>
   <link rel="stylesheet" href="../style.css">
+
+  <!-- PRINT STYLING: This ensures only the invoice shows up on the PDF -->
+  <style>
+    @media print {
+      /* Hide everything except the invoice preview */
+      .navbar, 
+      .card, 
+      .page-title, 
+      .page-sub, 
+      #download-btn {
+        display: none !important;
+      }
+
+      /* Make the grid act as a single column so the invoice stretches full width */
+      .grid-2 {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      /* Reset layout wrappers and shadows for a clean white page */
+      body, .page-wrap {
+        background: #fff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      #invoice-preview {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        display: block !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -66,25 +102,22 @@
       </div>
 
       <!-- Preview -->
-      <div id="invoice-preview" class="invoice-box hidden">
+      <div id="invoice-preview" class="invoice-box hidden" style="background: #fff; padding: 24px; border-radius: 8px;">
         <div class="inv-head">
           <div>
             <div class="inv-brand">INVOICE</div>
-            <div style="font-size:12px;color:#999;margin-top:5px;"
-                 id="p-date">—</div>
+            <div style="font-size:12px;color:#999;margin-top:5px;" id="p-date">—</div>
           </div>
           <div style="text-align:right;">
-            <div style="font-size:15px;font-weight:700;" id="p-from">
-              —
-            </div>
+            <div style="font-size:15px;font-weight:700;" id="p-from">—</div>
             <div style="font-size:12px;color:#888;">Freelancer</div>
           </div>
         </div>
-        <div style="font-size:12px;color:#999;margin-bottom:4px;">
+        <div style="font-size:12px;color:#999;margin-bottom:4px; margin-top: 20px;">
           Billed to:
         </div>
-        <div style="font-size:15px;font-weight:700;margin-bottom:18px;"
-             id="p-to">—</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:18px;" id="p-to">—</div>
+        
         <table class="inv-table">
           <thead>
             <tr>
@@ -99,57 +132,21 @@
             </tr>
             <tr id="p-tax-row">
               <td id="p-tax-label" style="color:#999;">—</td>
-              <td style="text-align:right;color:#999;"
-                  id="p-tax-val">—</td>
+              <td style="text-align:right;color:#999;" id="p-tax-val">—</td>
             </tr>
           </tbody>
         </table>
+        
         <div class="inv-total" id="p-total">—</div>
+
+        <!-- Print/Download Button -->
+        <button id="download-btn" class="btn" onclick="downloadInvoicePDF()" style="margin-top: 30px; width: 100%; background-color: #28a745;">
+          Print / PDF Export
+        </button>
       </div>
 
     </div>
   </div>
 <script src="../javascript/invoice.js"></script>
-  <!-- <script>
-    function previewInvoice() {
-      var from     = document.getElementById('inv-from').value    || 'Freelancer';
-      var to       = document.getElementById('inv-to').value      || 'Client';
-      var service  = document.getElementById('inv-service').value || 'Service';
-      var date     = document.getElementById('inv-date').value    || '';
-      var currency = document.getElementById('inv-currency').value;
-      var amount   = parseFloat(document.getElementById('inv-amount').value) || 0;
-      var taxRate  = parseFloat(document.getElementById('inv-tax').value)    || 0;
-
-      var taxAmt = amount * taxRate / 100;
-      var total  = amount + taxAmt;
-
-      function fmt(n) {
-        return currency + ' ' + Math.round(n).toLocaleString();
-      }
-
-      document.getElementById('p-from').textContent     = from;
-      document.getElementById('p-to').textContent       = to;
-      document.getElementById('p-date').textContent     = 'Date: ' + date;
-      document.getElementById('p-service').textContent  = service;
-      document.getElementById('p-subtotal').textContent = fmt(amount);
-      document.getElementById('p-total').textContent    = 'Total: ' + fmt(total);
-
-      var taxRow = document.getElementById('p-tax-row');
-      if (taxRate > 0) {
-        taxRow.style.display = '';
-        document.getElementById('p-tax-label').textContent =
-          'Tax (' + taxRate + '%)';
-        document.getElementById('p-tax-val').textContent = fmt(taxAmt);
-      } else {
-        taxRow.style.display = 'none';
-      }
-
-      document.getElementById('invoice-preview').classList.remove('hidden');
-    }
-
-    document.getElementById('inv-date').value =
-      new Date().toISOString().split('T')[0];
-  </script>-->
-
 </body>
 </html>

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreelanceIQ - Combined Dashboard</title>
   <link rel="stylesheet" href="../style.css">
+
 </head>
 <body>
 
@@ -84,41 +85,5 @@
 
   </div>
 <script src="../javascript/dashboard.js"></script>
-  <!-- <script> 
-    function calculateDashboard() {
-      var income  = parseFloat(document.getElementById('d-income').value)  || 0;
-      var bizExp  = parseFloat(document.getElementById('d-bizexp').value)  || 0;
-      var taxRate = parseFloat(document.getElementById('d-taxrate').value) || 0;
-      var house   = parseFloat(document.getElementById('d-house').value)   || 0;
-
-      var taxAmt  = income * taxRate / 100;
-      var realNet = income - bizExp - taxAmt - house;
-
-      function fmt(n) {
-        return 'PKR ' + Math.round(n).toLocaleString();
-      }
-
-      document.getElementById('d-r-gross').textContent = fmt(income);
-      document.getElementById('d-r-biz').textContent   = '- ' + fmt(bizExp);
-      document.getElementById('d-r-tax').textContent   = '- ' + fmt(taxAmt);
-      document.getElementById('d-r-house').textContent = '- ' + fmt(house);
-
-      var netEl = document.getElementById('d-r-net');
-      netEl.textContent = fmt(realNet);
-      netEl.style.color = realNet >= 0 ? '#1D9E75' : '#D85A30';
-
-      var msg = document.getElementById('d-r-msg');
-      if (realNet >= 0) {
-        msg.textContent = '✓ Positive! You earn more than you spend.';
-        msg.style.color = '#1D9E75';
-      } else {
-        msg.textContent = '⚠ Warning: Expenses exceed income!';
-        msg.style.color = '#D85A30';
-      }
-
-      document.getElementById('dash-result').classList.remove('hidden');
-    }
-  </script>-->
-
 </body>
 </html>

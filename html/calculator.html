@@ -1,213 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreelanceIQ - Profession Calculators</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceIQ - Profession Calculators</title>
+    <!-- We link Google Fonts and Bootstrap/Icon libraries if you use them, or you can keep yours -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- COPY OF YOUR CSS (STYLING STYLE.CSS INLINE) --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fbfd;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-  <!-- CSS link — goes UP one folder to find style.css -->
-  <link rel="stylesheet" href="../style.css">
+        /* Navbar Styling */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #eef2f6;
+            padding: 15px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #10b981; /* Brand green */
+        }
+
+        .logo span {
+            color: #1f2937;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        nav a.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+            padding-bottom: 5px;
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #111827;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Category Buttons */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #4b5563;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .category-btn.active {
+            background-color: #ecfdf5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        /* Calculator Layout Panel Grid */
+        .calculator-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .calculator-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 10px;
+            color: #111827;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #f9fafb;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #10b981;
+            background-color: #fff;
+        }
+
+        /* Results Display Panel (Right Column) */
+        .results-panel {
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .result-row.total {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .text-success {
+            color: #10b981 !important;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="brand">Freelance<span>IQ</span></div>
-    <a class="tab" href="home.html">Home</a>
-    <a class="tab active" href="calculator.html">Calculators</a>
-    <a class="tab" href="expense.html">Expenses</a>
-    <a class="tab" href="dashboard.html">Dashboard</a>
-    <a class="tab" href="invoice.html">Invoice</a>
-    <a class="tab" href="compare.html">Compare</a>
-  </nav>
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">Freelance<span>IQ</span></div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="calculator.html" class="active">Calculators</a>
+            <a href="expense.html">Expenses</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="invoice.html">Invoice</a>
+            <a href="compare.html">Compare</a>
+        </nav>
+    </header>
 
-  <div class="page-wrap">
+    <!-- Main Container -->
+    <div class="container">
+        <h2>Profession Calculators</h2>
+        <p class="subtitle">Select your profession → enter values → click Calculate</p>
 
-    <div class="page-title">Profession Calculators</div>
-    <div class="page-sub">
-      Select your profession → enter values → click Calculate
-    </div>
-
-    <!-- 11 PROFESSION BUTTONS -->
-    <!-- onclick calls selectProfession() in calculator.js -->
-    <div class="prof-grid">
-      <div class="prof-btn active"
-           onclick="selectProfession('Digital Marketing', this)">
-        Digital Marketing
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('TikTok Shop', this)">
-        TikTok Shop
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Video Editing', this)">
-        Video Editing
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Audio Editing', this)">
-        Audio Editing
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Graphic Design', this)">
-        Graphic Design
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Content Writing', this)">
-        Content Writing
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Social Media', this)">
-        Social Media
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Web Development', this)">
-        Web Development
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('Photography', this)">
-        Photography
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('E-Commerce', this)">
-        E-Commerce
-      </div>
-      <div class="prof-btn"
-           onclick="selectProfession('SEO', this)">
-        SEO
-      </div>
-    </div>
-
-    <div class="card">
-
-      <!-- This heading changes when profession is selected -->
-      <!-- id="calc-title" is targeted by selectProfession() -->
-      <div class="card-title" id="calc-title">
-        Digital Marketing Calculator
-      </div>
-
-      <div class="grid-2">
-
-        <!-- LEFT SIDE: INPUT FIELDS -->
-        <!-- IMPORTANT: every id here must exactly match -->
-        <!-- what calculator.js looks for -->
-        <div>
-
-          <!-- id="calc-currency" -->
-          <div class="field">
-            <label>Currency</label>
-            <select id="calc-currency">
-              <option>PKR</option>
-              <option>USD</option>
-              <option>GBP</option>
-              <option>EUR</option>
-              <option>AED</option>
-            </select>
-          </div>
-
-          <!-- id="c-income" -->
-          <div class="field">
-            <label>Gross Project Income</label>
-            <input type="number"
-                   id="c-income"
-                   placeholder="50000"
-                   value="50000">
-          </div>
-
-          <!-- id="c-platform" -->
-          <div class="field">
-            <label>Platform Fee % (Fiverr=20, Upwork=10)</label>
-            <input type="number"
-                   id="c-platform"
-                   placeholder="20"
-                   value="20">
-          </div>
-
-          <!-- id="c-software" -->
-          <div class="field">
-            <label>Software / Tools Cost</label>
-            <input type="number"
-                   id="c-software"
-                   placeholder="2000"
-                   value="2000">
-          </div>
-
-          <!-- id="extra-label" changes based on profession -->
-          <!-- id="c-extra" -->
-          <div class="field">
-            <label id="extra-label">Ad Spend / Other Cost</label>
-            <input type="number"
-                   id="c-extra"
-                   placeholder="3000"
-                   value="3000">
-          </div>
-
-          <!-- id="c-taxrate" -->
-          <div class="field">
-            <label>Tax Rate %</label>
-            <input type="number"
-                   id="c-taxrate"
-                   placeholder="10"
-                   value="10">
-          </div>
-
-          <!-- onclick calls calculateProfit() in calculator.js -->
-          <button class="btn" onclick="calculateProfit()">
-            Calculate Net Profit
-          </button>
-
+        <!-- Categories Row -->
+        <div class="categories">
+            <div class="category-btn active" data-profession="Digital Marketing">Digital Marketing</div>
+            <div class="category-btn" data-profession="TikTok Shop">TikTok Shop</div>
+            <div class="category-btn" data-profession="Video Editing">Video Editing</div>
+            <div class="category-btn" data-profession="Audio Editing">Audio Editing</div>
+            <div class="category-btn" data-profession="Graphic Design">Graphic Design</div>
+            <div class="category-btn" data-profession="Content Writing">Content Writing</div>
+            <div class="category-btn" data-profession="Social Media">Social Media</div>
+            <div class="category-btn" data-profession="Web Development">Web Development</div>
+            <div class="category-btn" data-profession="Photography">Photography</div>
+            <div class="category-btn" data-profession="E-Commerce">E-Commerce</div>
+            <div class="category-btn" data-profession="SEO">SEO</div>
         </div>
 
-        <!-- RIGHT SIDE: RESULT BOX -->
-        <!-- These spans are filled by calculateProfit() -->
-        <!-- Every id here must exactly match calculator.js -->
-        <div class="result-box" style="align-self: start;">
+        <!-- Calculator Form Container -->
+        <div class="calculator-card">
+            <div class="calculator-header" id="calculatorHeader">Digital Marketing Calculator</div>
+            
+            <div class="grid-layout">
+                <!-- Left Input Panel -->
+                <div class="inputs-panel">
+                    <!-- Dropdown Currency Selection with ID -->
+                    <div class="form-group">
+                        <label for="currencySelect">Currency</label>
+                        <select id="currencySelect" class="form-control">
+                            <option value="PKR" selected>PKR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="EUR">EUR</option>
+                            <option value="AED">AED</option>
+                        </select>
+                    </div>
 
-          <!-- id="r-gross" -->
-          <div class="result-row">
-            <span class="lbl">Gross Income</span>
-            <span id="r-gross">—</span>
-          </div>
+                    <!-- Gross Income with ID -->
+                    <div class="form-group">
+                        <label for="grossIncomeInput">Gross Income</label>
+                        <input type="number" id="grossIncomeInput" class="form-control" value="50000" placeholder="e.g. 50000">
+                    </div>
 
-          <!-- id="r-platform" -->
-          <div class="result-row">
-            <span class="lbl">Platform Fee</span>
-            <span id="r-platform">—</span>
-          </div>
+                    <!-- Platform Fee with ID -->
+                    <div class="form-group">
+                        <label for="platformFeeInput">Platform Fee % (Fiverr=20, Upwork=10)</label>
+                        <input type="number" id="platformFeeInput" class="form-control" value="20" placeholder="e.g. 20">
+                    </div>
 
-          <!-- id="r-software" -->
-          <div class="result-row">
-            <span class="lbl">Software / Tools</span>
-            <span id="r-software">—</span>
-          </div>
+                    <!-- Software / Tools Cost with ID -->
+                    <div class="form-group">
+                        <label for="softwareCostInput">Software / Tools Cost</label>
+                        <input type="number" id="softwareCostInput" class="form-control" value="2000" placeholder="e.g. 2000">
+                    </div>
 
-          <!-- id="r-extra" -->
-          <div class="result-row">
-            <span class="lbl">Extra Cost</span>
-            <span id="r-extra">—</span>
-          </div>
+                    <!-- Ad Spend / Other Cost with ID -->
+                    <div class="form-group">
+                        <label for="extraCostInput">Ad Spend / Other Cost</label>
+                        <input type="number" id="extraCostInput" class="form-control" value="300" placeholder="e.g. 300">
+                    </div>
 
-          <!-- id="r-tax" -->
-          <div class="result-row">
-            <span class="lbl">Tax</span>
-            <span id="r-tax">—</span>
-          </div>
+                    <!-- Tax Rate with ID -->
+                    <div class="form-group">
+                        <label for="taxRateInput">Tax Rate %</label>
+                        <input type="number" id="taxRateInput" class="form-control" value="10" placeholder="e.g. 10">
+                    </div>
+                </div>
 
-          <!-- id="r-net" — colored green or red by JS -->
-          <div class="result-row">
-            <span class="lbl">Net Profit</span>
-            <span id="r-net" style="font-size:17px;">—</span>
-          </div>
+                <!-- Right Display Sidebar with IDs -->
+                <div class="results-panel">
+                    <div>
+                        <div class="result-row">
+                            <span>Gross Income</span>
+                            <span id="grossIncomeDisplay">PKR 50,000</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Platform Fee</span>
+                            <span id="platformFeeDisplay">- PKR 10,000</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Software / Tools</span>
+                            <span id="softwareCostDisplay">- PKR 2,000</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Extra Cost</span>
+                            <span id="extraCostDisplay">- PKR 300</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Tax</span>
+                            <span id="taxDisplay">- PKR 5,000</span>
+                        </div>
+                    </div>
 
+                    <!-- Net Profit Highlight -->
+                    <div class="result-row total">
+                        <span>Net Profit</span>
+                        <span id="netProfitDisplay" class="text-success">PKR 32,700</span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-      </div>
     </div>
 
-  </div>
-
-  <!-- JAVASCRIPT LINK -->
-  <!-- Goes UP one folder then into JavaScript folder -->
-  <script src="../javascript/calculator.js"></script>
-
+    <!-- Link the external JavaScript file -->
+    <script src="../javascript/calculator.js"></script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 /* =====================================================
    SECTION 1: RESET
    Removes default browser styles so every browser
@@ -26,24 +25,30 @@ body {
 ===================================================== */
 .navbar {
   background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #eef2f6;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  justify-content: space-between; 
+  padding: 0 40px;
   flex-wrap: wrap;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
 
 .brand {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
-  color: #222222;
-  padding: 14px 0;
-  margin-right: 24px;
+  color: #1f2937;
+  padding: 16px 0;
+  margin-right: 32px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.5px;
 }
 
 .brand span {
@@ -51,13 +56,13 @@ body {
 }
 
 .tab {
-  padding: 16px 14px;
+  padding: 20px 16px;
   cursor: pointer;
-  color: #666666;
-  font-size: 13px;
+  color: #4b5563;
+  font-size: 14px;
   font-weight: 500;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
   white-space: nowrap;
   text-decoration: none;
   display: inline-block;
@@ -71,6 +76,47 @@ body {
   color: #1D9E75;
   border-bottom-color: #1D9E75;
   font-weight: 600;
+}
+
+/* Premium Navigation Currency Selector Dropdown Wrapper Node */
+.currency-nav-wrap {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f3f4f6;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: border-color 0.2s ease;
+}
+
+.currency-nav-wrap:hover {
+  border-color: #d1d5db;
+}
+
+.currency-nav-wrap span {
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#globalCurrencySelect {
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  color: #1f2937;
+  cursor: pointer;
+  outline: none;
+  font-variant-numeric: tabular-nums;
+}
+
+#globalCurrencySelect option {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
 }
 
 
@@ -135,6 +181,14 @@ body {
 }
 
 @media (max-width: 640px) {
+  .navbar {
+    padding: 10px 16px;
+  }
+  .currency-nav-wrap {
+    margin: 8px 0;
+    width: 100%;
+    justify-content: space-between;
+  }
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr;
@@ -144,12 +198,13 @@ body {
 
 /* =====================================================
    SECTION 6: FORM FIELDS
+   Supports both static and dynamic form field nodes perfectly.
 ===================================================== */
-.field {
+.field, .form-group {
   margin-bottom: 16px;
 }
 
-.field label {
+.field label, .form-group label {
   display: block;
   font-size: 12px;
   color: #666666;
@@ -157,8 +212,7 @@ body {
   font-weight: 500;
 }
 
-.field input,
-.field select {
+.field input, .field select, .form-group input {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #dddddd;
@@ -169,8 +223,7 @@ body {
   transition: border-color 0.2s;
 }
 
-.field input:focus,
-.field select:focus {
+.field input:focus, .field select:focus, .form-group input:focus {
   outline: none;
   border-color: #1D9E75;
   box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
@@ -489,9 +542,88 @@ body {
 /* =====================================================
    SECTION 15: UTILITY CLASSES
 ===================================================== */
-.hidden      { display: none; }
+.hidden      { display: none !important; }
 .text-green  { color: #1D9E75; }
 .text-red    { color: #D85A30; }
 .text-center { text-align: center; }
 .bold        { font-weight: 700; }
 .helper-text { font-size: 12px; color: #888888; margin-top: 8px; }
+
+/* Custom print media directives */
+@media print {
+  .navbar, .btn, #download-btn, .card, .page-title, .page-sub { 
+    display: none !important; 
+  }
+  .grid-2 {
+    display: block !important;
+    width: 100% !important;
+  }
+  body, .page-wrap {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  #invoice-preview {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+}
+/* =====================================================
+   SECTION 16: DYNAMIC INVOICE LINE ITEMS 
+   Appends cleanly to manage row spacing and item states
+===================================================== */
+.invoice-item-row {
+  border: 1px solid #e8e8e8;
+  border-radius: 9px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background-color: #fdfdfd;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
+  transition: all 0.2s ease;
+}
+
+.invoice-item-row:hover {
+  border-color: #d0d0d0;
+  background-color: #ffffff;
+}
+
+/* Redesigned trash button utilizing your font-awesome package */
+.invoice-item-row .remove-item-btn {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.invoice-item-row .remove-item-btn:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+/* Styled real-time array limit error feedback */
+.msg-limit {
+  color: #d97706;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Extra table layout tuning for complex items inside preview pane */
+#p-invoice-items-body td {
+  word-break: break-word;
+}

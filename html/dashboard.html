@@ -5,85 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreelanceIQ - Combined Dashboard</title>
   <link rel="stylesheet" href="../style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
   <nav class="navbar">
-    <div class="brand">Freelance<span>IQ</span></div>
-    <a class="tab" href="home.html">Home</a>
-    <a class="tab" href="calculator.html">Calculators</a>
-    <a class="tab" href="expense.html">Expenses</a>
-    <a class="tab active" href="dashboard.html">Dashboard</a>
-    <a class="tab" href="invoice.html">Invoice</a>
-    <a class="tab" href="compare.html">Compare</a>
+    <div style="display: flex; align-items: center; gap: 30px;">
+      <a class="brand" href="home.html">Freelance<span>IQ</span></a>
+      <div style="display: flex; gap: 15px;">
+        <a class="tab" href="home.html">Home</a>
+        <a class="tab" href="calculator.html">Calculators</a>
+        <a class="tab" href="expense.html">Expenses</a>
+        <a class="tab active" href="dashboard.html">Dashboard</a>
+        <a class="tab" href="invoice.html">Invoice</a>
+        <a class="tab" href="compare.html">Compare</a>
+      </div>
+    </div>
+    <div class="currency-nav-wrap">
+      <span>Currency:</span>
+      <select id="globalCurrencySelect">
+        <option value="USD">USD ($)</option>
+        <option value="PKR">PKR (₨)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="AED">AED (د.إ)</option>
+      </select>
+    </div>
   </nav>
 
   <div class="page-wrap">
-
     <div class="page-title">Combined Financial Dashboard</div>
-    <div class="page-sub">
-      Your real net income after business AND personal expenses
-    </div>
+    <div class="page-sub">Your real net income after business AND personal expenses</div>
 
     <div class="card">
       <div class="card-title">Enter your monthly figures</div>
       <div class="grid-2">
-        <div class="field">
-          <label>Monthly Freelance Income</label>
-          <input type="number" id="d-income" value="45000">
-        </div>
-        <div class="field">
-          <label>Total Business Costs</label>
-          <input type="number" id="d-bizexp" value="5000">
-        </div>
-        <div class="field">
-          <label>Tax Rate %</label>
-          <input type="number" id="d-taxrate" value="10">
-        </div>
-        <div class="field">
-          <label>Total House Expenses</label>
-          <input type="number" id="d-house" value="49500">
-        </div>
+        <div class="field"><label>Monthly Freelance Income</label><input type="number" id="d-income" value="0"></div>
+        <div class="field"><label>Total Business Costs</label><input type="number" id="d-bizexp" value="0"></div>
+        <div class="field"><label>Tax Rate %</label><input type="number" id="d-taxrate" value="0"></div>
+        <div class="field"><label>Total House Expenses</label><input type="number" id="d-house" value="0"></div>
       </div>
-      <button class="btn" onclick="calculateDashboard()">
-        Calculate Real Net Income
-      </button>
+      <button class="btn" onclick="calculateDashboard()">Calculate Real Net Income</button>
     </div>
 
     <div id="dash-result" class="hidden">
       <div class="metric-grid">
-        <div class="metric">
-          <div class="m-label">Gross Income</div>
-          <div class="m-value green" id="d-r-gross">—</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Business Costs</div>
-          <div class="m-value red" id="d-r-biz">—</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Tax</div>
-          <div class="m-value red" id="d-r-tax">—</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">House Expenses</div>
-          <div class="m-value red" id="d-r-house">—</div>
-        </div>
+        <div class="metric"><div class="m-label">Gross Income</div><div class="m-value green" id="d-r-gross">—</div></div>
+        <div class="metric"><div class="m-label">Business Costs</div><div class="m-value red" id="d-r-biz">—</div></div>
+        <div class="metric"><div class="m-label">Tax Liability</div><div class="m-value red" id="d-r-tax">—</div></div>
+        <div class="metric"><div class="m-label">House Expenses</div><div class="m-value red" id="d-r-house">—</div></div>
       </div>
-
       <div class="card" style="text-align:center; padding:32px;">
-        <div style="font-size:13px; color:#888; margin-bottom:10px;">
-          Real Net Income After Everything
-        </div>
-        <div style="font-size:38px; font-weight:800;" id="d-r-net">
-          —
-        </div>
-        <div style="font-size:13px; margin-top:10px;" id="d-r-msg">
-        </div>
+        <div style="font-size:13px; color:#888; margin-bottom:10px;">Real Net Income After Everything</div>
+        <div style="font-size:38px; font-weight:800;" id="d-r-net">—</div>
+        <div style="font-size:13px; margin-top:10px;" id="d-r-msg"></div>
       </div>
     </div>
-
   </div>
-<script src="../javascript/dashboard.js"></script>
+
+  <script src="../javascript/dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropdown = document.getElementById("globalCurrencySelect");
+      dropdown.value = localStorage.getItem("fiq_currency") || "USD";
+      dropdown.addEventListener("change", (e) => {
+        localStorage.setItem("fiq_currency", e.target.value);
+        window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
+      });
+      
+      // Auto-trigger on inputs to mirror functionality
+      document.querySelectorAll(".card input").forEach(input => {
+        input.addEventListener("input", calculateDashboard);
+      });
+      calculateDashboard();
+    });
+  </script>
 </body>
 </html>

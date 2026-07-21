@@ -4,208 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreelanceIQ - Profession Calculators</title>
-    <!-- We link Google Fonts and Bootstrap/Icon libraries if you use them, or you can keep yours -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- COPY OF YOUR CSS (STYLING STYLE.CSS INLINE) --- */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fbfd;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        /* Navbar Styling */
-        header {
-            background-color: #fff;
-            border-bottom: 1px solid #eef2f6;
-            padding: 15px 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            color: #10b981; /* Brand green */
-        }
-
-        .logo span {
-            color: #1f2937;
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #4b5563;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        nav a.active {
-            color: #10b981;
-            border-bottom: 2px solid #10b981;
-            padding-bottom: 5px;
-        }
-
-        /* Main Container Layout */
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        h2 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #111827;
-        }
-
-        .subtitle {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        /* Category Buttons */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .category-btn {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            color: #4b5563;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .category-btn.active {
-            background-color: #ecfdf5;
-            border-color: #10b981;
-            color: #065f46;
-        }
-
-        /* Calculator Layout Panel Grid */
-        .calculator-card {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .calculator-header {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #f3f4f6;
-            padding-bottom: 10px;
-            color: #111827;
-        }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-        }
-
-        /* Form Controls */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: #4b5563;
-            margin-bottom: 6px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background-color: #f9fafb;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #10b981;
-            background-color: #fff;
-        }
-
-        /* Results Display Panel (Right Column) */
-        .results-panel {
-            background-color: #f9fafb;
-            border-radius: 8px;
-            padding: 20px;
-            border: 1px solid #f3f4f6;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #4b5563;
-        }
-
-        .result-row.total {
-            border-top: 1px solid #e5e7eb;
-            padding-top: 15px;
-            margin-top: 15px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #111827;
-        }
-
-        .text-success {
-            color: #10b981 !important;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f9fbfd; margin: 0; padding: 0; color: #333; }
+        header { background-color: #ffffff; border-bottom: 1px solid #eef2f6; padding: 15px 50px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 22px; font-weight: 700; color: #10b981; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: #1f2937; }
+        nav { display: flex; align-items: center; }
+        nav a { margin: 0 15px; text-decoration: none; color: #4b5563; font-weight: 500; font-size: 14px; }
+        nav a.active { color: #10b981; border-bottom: 2px solid #10b981; padding-bottom: 5px; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        h2 { font-size: 26px; font-weight: 700; margin-bottom: 5px; color: #111827; }
+        .subtitle { color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+        .categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .category-btn { background: #fff; border: 1px solid #e5e7eb; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #4b5563; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .category-btn.active { background-color: #ecfdf5; border-color: #10b981; color: #065f46; }
+        .calculator-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .calculator-header { font-size: 16px; font-weight: 600; margin-bottom: 20px; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; color: #111827; }
+        .grid-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; color: #4b5563; margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #f9fafb; }
+        .form-control:focus { outline: none; border-color: #10b981; background-color: #fff; }
+        .results-panel { background-color: #f9fafb; border-radius: 8px; padding: 20px; border: 1px solid #f3f4f6; display: flex; flex-direction: column; justify-content: space-between; }
+        .result-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 14px; color: #4b5563; }
+        .result-row.total { border-top: 1px solid #e5e7eb; padding-top: 15px; margin-top: 15px; font-size: 18px; font-weight: 700; color: #111827; }
+        .text-success { color: #10b981 !important; }
     </style>
 </head>
 <body>
+<nav class="navbar" style="display:flex;align-items:center;justify-content:space-between;padding:15px 50px;background:white;border-bottom:1px solid rgba(125,34,77,.1);">
 
-    <!-- Header Navigation -->
-    <header>
-        <div class="logo">Freelance<span>IQ</span></div>
-        <nav>
-            <a href="home.html">Home</a>
-            <a href="calculator.html" class="active">Calculators</a>
-            <a href="expense.html">Expenses</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="invoice.html">Invoice</a>
-            <a href="compare.html">Compare</a>
-        </nav>
-    </header>
+    <div style="display:flex;align-items:center;gap:30px;">
 
-    <!-- Main Container -->
+        <div class="brand">Freelance<span>IQ</span></div>
+
+        <div style="display:flex;gap:15px;">
+            <a class="tab" href="home.html">Home</a>
+            <a class="tab active" href="calculator.html">Calculators</a>
+            <a class="tab" href="expense.html">Expenses</a>
+            <a class="tab" href="dashboard.html">Dashboard</a>
+            <a class="tab" href="invoice.html">Invoice</a>
+            <a class="tab" href="compare.html">Compare</a>
+        </div>
+
+    </div>
+
+    <div class="currency-nav-wrap" style="font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;background:#FFF0F5;padding:6px 12px;border-radius:8px;">
+        <span style="color:#7D224D;font-size:12px;font-weight:600;">Currency:</span>
+
+        <select id="globalCurrencySelect" style="background:transparent;border:none;font-weight:700;color:#7D224D;cursor:pointer;outline:none;">
+            <option value="USD">USD ($)</option>
+            <option value="PKR">PKR (₨)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="AED">AED (د.إ)</option>
+        </select>
+    </div>
+
+</nav>
+
     <div class="container">
         <h2>Profession Calculators</h2>
         <p class="subtitle">Select your profession → enter values → click Calculate</p>
 
-        <!-- Categories Row -->
         <div class="categories">
             <div class="category-btn active" data-profession="Digital Marketing">Digital Marketing</div>
             <div class="category-btn" data-profession="TikTok Shop">TikTok Shop</div>
@@ -220,92 +83,39 @@
             <div class="category-btn" data-profession="SEO">SEO</div>
         </div>
 
-        <!-- Calculator Form Container -->
         <div class="calculator-card">
             <div class="calculator-header" id="calculatorHeader">Digital Marketing Calculator</div>
-            
             <div class="grid-layout">
-                <!-- Left Input Panel -->
-                <div class="inputs-panel">
-                    <!-- Dropdown Currency Selection with ID -->
-                    <div class="form-group">
-                        <label for="currencySelect">Currency</label>
-                        <select id="currencySelect" class="form-control">
-                            <option value="PKR" selected>PKR</option>
-                            <option value="USD">USD</option>
-                            <option value="GBP">GBP</option>
-                            <option value="EUR">EUR</option>
-                            <option value="AED">AED</option>
-                        </select>
-                    </div>
-
-                    <!-- Gross Income with ID -->
-                    <div class="form-group">
-                        <label for="grossIncomeInput">Gross Income</label>
-                        <input type="number" id="grossIncomeInput" class="form-control" value="50000" placeholder="e.g. 50000">
-                    </div>
-
-                    <!-- Platform Fee with ID -->
-                    <div class="form-group">
-                        <label for="platformFeeInput">Platform Fee % (Fiverr=20, Upwork=10)</label>
-                        <input type="number" id="platformFeeInput" class="form-control" value="20" placeholder="e.g. 20">
-                    </div>
-
-                    <!-- Software / Tools Cost with ID -->
-                    <div class="form-group">
-                        <label for="softwareCostInput">Software / Tools Cost</label>
-                        <input type="number" id="softwareCostInput" class="form-control" value="2000" placeholder="e.g. 2000">
-                    </div>
-
-                    <!-- Ad Spend / Other Cost with ID -->
-                    <div class="form-group">
-                        <label for="extraCostInput">Ad Spend / Other Cost</label>
-                        <input type="number" id="extraCostInput" class="form-control" value="300" placeholder="e.g. 300">
-                    </div>
-
-                    <!-- Tax Rate with ID -->
-                    <div class="form-group">
-                        <label for="taxRateInput">Tax Rate %</label>
-                        <input type="number" id="taxRateInput" class="form-control" value="10" placeholder="e.g. 10">
-                    </div>
+                
+                <!-- Dynamic Input Panel Injection Point Wrap Element -->
+                <div class="inputs-panel" id="dynamicFormContainer">
+                    <!-- Fields get injected here automatically from calculator.js -->
                 </div>
 
-                <!-- Right Display Sidebar with IDs -->
                 <div class="results-panel">
                     <div>
-                        <div class="result-row">
-                            <span>Gross Income</span>
-                            <span id="grossIncomeDisplay">PKR 50,000</span>
-                        </div>
-                        <div class="result-row">
-                            <span>Platform Fee</span>
-                            <span id="platformFeeDisplay">- PKR 10,000</span>
-                        </div>
-                        <div class="result-row">
-                            <span>Software / Tools</span>
-                            <span id="softwareCostDisplay">- PKR 2,000</span>
-                        </div>
-                        <div class="result-row">
-                            <span>Extra Cost</span>
-                            <span id="extraCostDisplay">- PKR 300</span>
-                        </div>
-                        <div class="result-row">
-                            <span>Tax</span>
-                            <span id="taxDisplay">- PKR 5,000</span>
-                        </div>
+                        <div class="result-row"><span>Gross Income</span><span id="grossIncomeDisplay">0.00</span></div>
+                        <div class="result-row"><span>Platform Fee</span><span id="platformFeeDisplay">0.00</span></div>
+                        <div class="result-row"><span>Software / Tools</span><span id="softwareCostDisplay">0.00</span></div>
+                        <div class="result-row"><span>Extra Cost</span><span id="extraCostDisplay">0.00</span></div>
+                        <div class="result-row"><span>Tax</span><span id="taxDisplay">0.00</span></div>
                     </div>
-
-                    <!-- Net Profit Highlight -->
-                    <div class="result-row total">
-                        <span>Net Profit</span>
-                        <span id="netProfitDisplay" class="text-success">PKR 32,700</span>
-                    </div>
+                    <div class="result-row total"><span>Net Profit</span><span id="netProfitDisplay" class="text-success">0.00</span></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Link the external JavaScript file -->
     <script src="../javascript/calculator.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdown = document.getElementById("globalCurrencySelect");
+            dropdown.value = localStorage.getItem("fiq_currency") || "USD";
+            dropdown.addEventListener("change", (e) => {
+                localStorage.setItem("fiq_currency", e.target.value);
+                window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
+            });
+        });
+    </script>
 </body>
 </html>

@@ -9,10 +9,10 @@
 </head>
 <body>
 
-  <nav class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 50px; background: white; border-bottom: 1px solid #eef2f6;">
-    <div style="display: flex; align-items: center; gap: 30px;">
-      <div class="brand">Freelance<span>IQ</span></div>
-      <div style="display: flex; gap: 15px;">
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="home.html">Freelance<span>IQ</span></a>
+      <div class="nav-links">
         <a class="tab" href="home.html">Home</a>
         <a class="tab" href="calculator.html">Calculators</a>
         <a class="tab" href="expense.html">Expenses</a>
@@ -21,9 +21,10 @@
         <a class="tab active" href="compare.html">Compare</a>
       </div>
     </div>
-    <div class="currency-nav-wrap" style="font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; background: #f3f4f6; padding: 6px 12px; border-radius: 8px; border: 1px solid #e5e7eb;">
-      <span style="color: #4b5563; font-size: 12px; font-weight: 600;">Currency:</span>
-      <select id="globalCurrencySelect" style="background: transparent; border: none; font-weight: 700; color: #1f2937; cursor: pointer; outline: none;">
+
+    <div class="currency-nav-wrap no-print">
+      <span class="currency-label">CURRENCY:</span>
+      <select id="globalCurrencySelect">
         <option value="USD">USD ($)</option>
         <option value="PKR">PKR (₨)</option>
         <option value="GBP">GBP (£)</option>
@@ -41,17 +42,16 @@
       <div class="grid-2">
         <div class="field">
           <label>Project Value</label>
-          <input type="number" id="cmp-amount" placeholder="50000" value="0">
+          <input type="number" id="cmp-amount" placeholder="50000">
         </div>
         <div class="field" style="display: none;">
           <label>Hidden Reference Currency</label>
           <select id="cmp-currency"><option>PKR</option><option>USD</option><option>GBP</option><option>EUR</option><option>AED</option></select>
         </div>
       </div>
-      <button class="btn" onclick="calculateComparison()">Compare Platforms</button>
     </div>
 
-    <div id="compare-result" class="hidden">
+    <div id="compare-result">
       <div class="grid-3">
         <div class="compare-card" id="cmp-fiverr">
           <div class="c-name">Fiverr</div><div class="c-fee">20% commission</div>
@@ -75,18 +75,23 @@
     document.addEventListener("DOMContentLoaded", () => {
       const dropdown = document.getElementById("globalCurrencySelect");
       const savedCurrency = localStorage.getItem("fiq_currency") || "USD";
-      dropdown.value = savedCurrency;
+      if (dropdown) dropdown.value = savedCurrency;
       
       const formCurrency = document.getElementById("cmp-currency");
-      if(formCurrency) formCurrency.value = savedCurrency;
+      if (formCurrency) formCurrency.value = savedCurrency;
 
-      document.getElementById("cmp-amount").addEventListener("input", calculateComparison);
+      const cmpInput = document.getElementById("cmp-amount");
+      if (cmpInput) {
+        cmpInput.addEventListener("input", calculateComparison);
+      }
 
-      dropdown.addEventListener("change", (e) => {
-        localStorage.setItem("fiq_currency", e.target.value);
-        if(formCurrency) formCurrency.value = e.target.value;
-        window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
-      });
+      if (dropdown) {
+        dropdown.addEventListener("change", (e) => {
+          localStorage.setItem("fiq_currency", e.target.value);
+          if(formCurrency) formCurrency.value = e.target.value;
+          window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
+        });
+      }
 
       calculateComparison();
     });

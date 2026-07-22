@@ -2,7 +2,6 @@
 // FILENAME: javascript/calculator.js
 // ==========================================================================
 
-// 1. Fixed market exchange rates benchmark mapped relative to a 1 USD base
 const exchangeRates = {
     USD: 1.0,
     PKR: 278.0, 
@@ -11,7 +10,6 @@ const exchangeRates = {
     AED: 3.67
 };
 
-// Currency signs mapping lookup dictionary
 const currencySigns = {
     USD: '$',
     PKR: '₨',
@@ -20,18 +18,14 @@ const currencySigns = {
     AED: 'د.إ'
 };
 
-/**
- * Modular configuration registry for all profession calculators.
- * Digital Marketing keeps its original precise financial terms, labels, and targets.
- */
 const professionSchema = {
     "Digital Marketing": {
         fields: [
-            { id: "grossIncomeInput", label: "Gross Income", placeholder: "e.g., 50000", defaultValue: 50000, type: "currency" },
+            { id: "grossIncomeInput", label: "Gross Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
             { id: "platformFeeInput", label: "Platform Fee % (Fiverr=20, Upwork=10)", placeholder: "e.g., 20", defaultValue: 20, type: "percentage" },
-            { id: "softwareCostInput", label: "Software / Tools Cost", placeholder: "e.g., 2000", defaultValue: 2000, type: "currency" },
-            { id: "extraCostInput", label: "Ad Spend / Other Cost", placeholder: "e.g., 300", defaultValue: 300, type: "currency" },
-            { id: "taxRateInput", label: "Tax Rate %", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" }
+            { id: "softwareCostInput", label: "Software / Tools Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "extraCostInput", label: "Ad Spend / Other Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "taxRateInput", label: "Tax Rate %", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.grossIncomeInput * (vals.platformFeeInput / 100);
@@ -48,12 +42,12 @@ const professionSchema = {
     },
     "TikTok Shop": {
         fields: [
-            { id: "sellingPrice", label: "Selling Price (Total Revenue)", placeholder: "e.g., 75000", defaultValue: 75000, type: "currency" },
-            { id: "productCost", label: "Product Cost", placeholder: "e.g., 8000", defaultValue: 8000, type: "currency" },
-            { id: "shipping", label: "Shipping Cost", placeholder: "e.g., 4000", defaultValue: 4000, type: "currency" },
-            { id: "platformCommission", label: "Platform Commission (%)", placeholder: "e.g., 5", defaultValue: 5, type: "percentage" },
-            { id: "ads", label: "Ads Spend", placeholder: "e.g., 2000", defaultValue: 2000, type: "currency" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 15", defaultValue: 15, type: "percentage" }
+            { id: "sellingPrice", label: "Selling Price (Total Revenue)", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "productCost", label: "Product Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "shipping", label: "Shipping Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformCommission", label: "Platform Commission (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "ads", label: "Ads Spend", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.sellingPrice * (vals.platformCommission / 100);
@@ -64,11 +58,11 @@ const professionSchema = {
     },
     "Video Editing": {
         fields: [
-            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 60000", defaultValue: 60000, type: "currency" },
-            { id: "softwareSubscription", label: "Software Subscription", placeholder: "e.g., 1500", defaultValue: 1500, type: "currency" },
-            { id: "assetsCost", label: "Assets Cost", placeholder: "e.g., 500", defaultValue: 0, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 20", defaultValue: 20, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 5", defaultValue: 5, type: "percentage" }
+            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "softwareSubscription", label: "Software Subscription", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "assetsCost", label: "Assets Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.projectIncome * (vals.platformFee / 100);
@@ -79,11 +73,11 @@ const professionSchema = {
     },
     "Audio Editing": {
         fields: [
-            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 45000", defaultValue: 45000, type: "currency" },
-            { id: "pluginCost", label: "Plugin Cost", placeholder: "e.g., 800", defaultValue: 800, type: "currency" },
-            { id: "softwareCost", label: "Software Cost", placeholder: "e.g., 400", defaultValue: 0, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 20", defaultValue: 20, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 5", defaultValue: 5, type: "percentage" }
+            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "pluginCost", label: "Plugin Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "softwareCost", label: "Software Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.projectIncome * (vals.platformFee / 100);
@@ -94,11 +88,11 @@ const professionSchema = {
     },
     "Graphic Design": {
         fields: [
-            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 40000", defaultValue: 40000, type: "currency" },
-            { id: "fontsAssetsCost", label: "Fonts & Assets Cost", placeholder: "e.g., 100", defaultValue: 100, type: "currency" },
-            { id: "softwareSubscription", label: "Software Subscription", placeholder: "e.g., 1200", defaultValue: 1200, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 20", defaultValue: 20, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 8", defaultValue: 8, type: "percentage" }
+            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "fontsAssetsCost", label: "Fonts & Assets Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "softwareSubscription", label: "Software Subscription", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.projectIncome * (vals.platformFee / 100);
@@ -109,11 +103,11 @@ const professionSchema = {
     },
     "Content Writing": {
         fields: [
-            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 35000", defaultValue: 35000, type: "currency" },
-            { id: "researchCost", label: "Research Cost", placeholder: "e.g., 500", defaultValue: 0, type: "currency" },
-            { id: "aiToolCost", label: "AI Tool Cost", placeholder: "e.g., 500", defaultValue: 500, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 15", defaultValue: 15, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 5", defaultValue: 5, type: "percentage" }
+            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "researchCost", label: "Research Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "aiToolCost", label: "AI Tool Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.projectIncome * (vals.platformFee / 100);
@@ -124,11 +118,11 @@ const professionSchema = {
     },
     "Social Media": {
         fields: [
-            { id: "monthlyIncome", label: "Monthly Income", placeholder: "e.g., 55000", defaultValue: 55000, type: "currency" },
-            { id: "adBudget", label: "Ad Budget", placeholder: "e.g., 1500", defaultValue: 1500, type: "currency" },
-            { id: "schedulingToolCost", label: "Scheduling Tool Cost", placeholder: "e.g., 1100", defaultValue: 1100, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" }
+            { id: "monthlyIncome", label: "Monthly Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "adBudget", label: "Ad Budget", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "schedulingToolCost", label: "Scheduling Tool Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.monthlyIncome * (vals.platformFee / 100);
@@ -139,11 +133,11 @@ const professionSchema = {
     },
     "Web Development": {
         fields: [
-            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 90000", defaultValue: 90000, type: "currency" },
-            { id: "hostingDomain", label: "Hosting & Domain", placeholder: "e.g., 2500", defaultValue: 2500, type: "currency" },
-            { id: "apiCost", label: "API Cost", placeholder: "e.g., 500", defaultValue: 500, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 12", defaultValue: 12, type: "percentage" }
+            { id: "projectIncome", label: "Project Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "hostingDomain", label: "Hosting & Domain", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "apiCost", label: "API Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.projectIncome * (vals.platformFee / 100);
@@ -154,12 +148,12 @@ const professionSchema = {
     },
     "Photography": {
         fields: [
-            { id: "sessionIncome", label: "Session Income", placeholder: "e.g., 70000", defaultValue: 70000, type: "currency" },
-            { id: "equipmentCost", label: "Equipment Cost", placeholder: "e.g., 2000", defaultValue: 2000, type: "currency" },
-            { id: "travelCost", label: "Travel Cost", placeholder: "e.g., 2000", defaultValue: 2000, type: "currency" },
-            { id: "editingSoftware", label: "Editing Software", placeholder: "e.g., 3000", defaultValue: 3000, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 5", defaultValue: 5, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" }
+            { id: "sessionIncome", label: "Session Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "equipmentCost", label: "Equipment Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "travelCost", label: "Travel Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "editingSoftware", label: "Editing Software", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.sessionIncome * (vals.platformFee / 100);
@@ -170,12 +164,12 @@ const professionSchema = {
     },
     "E-Commerce": {
         fields: [
-            { id: "revenue", label: "Total Revenue", placeholder: "e.g., 120000", defaultValue: 120000, type: "currency" },
-            { id: "productCost", label: "Product Cost", placeholder: "e.g., 15000", defaultValue: 15000, type: "currency" },
-            { id: "shipping", label: "Shipping", placeholder: "e.g., 4000", defaultValue: 4000, type: "currency" },
-            { id: "marketingCost", label: "Marketing Cost", placeholder: "e.g., 4000", defaultValue: 4000, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 8", defaultValue: 8, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 15", defaultValue: 15, type: "percentage" }
+            { id: "revenue", label: "Total Revenue", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "productCost", label: "Product Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "shipping", label: "Shipping", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "marketingCost", label: "Marketing Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.revenue * (vals.platformFee / 100);
@@ -186,11 +180,11 @@ const professionSchema = {
     },
     "SEO": {
         fields: [
-            { id: "clientIncome", label: "Client Income", placeholder: "e.g., 65000", defaultValue: 65000, type: "currency" },
-            { id: "seoTools", label: "SEO Tools Cost", placeholder: "e.g., 1800", defaultValue: 1800, type: "currency" },
-            { id: "contentCost", label: "Content Cost", placeholder: "e.g., 400", defaultValue: 400, type: "currency" },
-            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 15", defaultValue: 15, type: "percentage" },
-            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 10", defaultValue: 10, type: "percentage" }
+            { id: "clientIncome", label: "Client Income", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "seoTools", label: "SEO Tools Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "contentCost", label: "Content Cost", placeholder: "e.g., 0", defaultValue: 0, type: "currency" },
+            { id: "platformFee", label: "Platform Fee (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" },
+            { id: "taxRate", label: "Tax Rate (%)", placeholder: "e.g., 0", defaultValue: 0, type: "percentage" }
         ],
         calculate: (vals) => {
             const pFee = vals.clientIncome * (vals.platformFee / 100);
@@ -204,10 +198,7 @@ const professionSchema = {
 let currentCurrency = localStorage.getItem('fiq_currency') || 'USD';
 let currentProfession = 'Digital Marketing';
 
-// Fetch UI Document Form Containers and Targets
 const calculatorHeader = document.getElementById('calculatorHeader');
-
-// Dynamically targeted output node parameters
 const grossIncomeDisplay = document.getElementById('grossIncomeDisplay');
 const platformFeeDisplay = document.getElementById('platformFeeDisplay'); 
 const softwareCostDisplay = document.getElementById('softwareCostDisplay');
@@ -217,9 +208,17 @@ const netProfitDisplay = document.getElementById('netProfitDisplay');
 
 const formContainer = document.getElementById('dynamicFormContainer'); 
 
-/**
- * Builds and mounts HTML input elements dynamically dependent on the selected schema logic
- */
+function attachZeroFocusHandling(input) {
+    if (!input.placeholder) input.placeholder = "0";
+    input.addEventListener('focus', function () {
+        if (this.value === '0') {
+            this.value = '';
+        } else {
+            this.select();
+        }
+    });
+}
+
 function renderDynamicForm(profession, checkOldValues = false) {
     if (!formContainer) return;
 
@@ -230,7 +229,7 @@ function renderDynamicForm(profession, checkOldValues = false) {
     if (checkOldValues) {
         schema.fields.forEach(field => {
             const inputNode = document.getElementById(field.id);
-            if (inputNode) preservedValues[field.id] = parseFloat(inputNode.value) || 0;
+            if (inputNode) preservedValues[field.id] = inputNode.value;
         });
     }
 
@@ -249,18 +248,23 @@ function renderDynamicForm(profession, checkOldValues = false) {
         input.type = 'number';
         input.className = 'form-control';
         input.id = field.id;
-        input.placeholder = field.placeholder;
+        input.placeholder = "0";
 
         if (checkOldValues && preservedValues[field.id] !== undefined) {
             input.value = preservedValues[field.id];
         } else {
-            if (field.type === 'currency') {
-                input.value = Math.round(field.defaultValue * conversionFactor);
+            if (field.defaultValue && field.defaultValue !== 0) {
+                if (field.type === 'currency') {
+                    input.value = Math.round(field.defaultValue * conversionFactor);
+                } else {
+                    input.value = field.defaultValue;
+                }
             } else {
-                input.value = field.defaultValue;
+                input.value = '';
             }
         }
 
+        attachZeroFocusHandling(input);
         input.addEventListener('input', calculateNetProfit);
 
         inputGroup.appendChild(label);
@@ -269,9 +273,6 @@ function renderDynamicForm(profession, checkOldValues = false) {
     });
 }
 
-/**
- * Core Computational Calculation Processing Engine Core Routine
- */
 function calculateNetProfit() {
     const schema = professionSchema[currentProfession];
     if (!schema) return;
@@ -284,9 +285,9 @@ function calculateNetProfit() {
 
     const results = schema.calculate(inputValues);
 
-    grossIncomeDisplay.innerText = formatCurrency(results.gross, currentCurrency);
-    taxDisplay.innerText = `- ${formatCurrency(results.tax, currentCurrency)}`;
-    netProfitDisplay.innerText = formatCurrency(results.net, currentCurrency);
+    if (grossIncomeDisplay) grossIncomeDisplay.innerText = formatCurrency(results.gross, currentCurrency);
+    if (taxDisplay) taxDisplay.innerText = `- ${formatCurrency(results.tax, currentCurrency)}`;
+    if (netProfitDisplay) netProfitDisplay.innerText = formatCurrency(results.net, currentCurrency);
 
     if (currentProfession === "Digital Marketing") {
         if (platformFeeDisplay) platformFeeDisplay.innerText = `- ${formatCurrency(results.platformFee, currentCurrency)}`;
@@ -315,9 +316,6 @@ function formatCurrency(value, currency) {
     return value < 0 ? `-${sign} ${formatted}` : `${sign} ${formatted}`;
 }
 
-/**
- * Global Callback hook linked explicitly into the Navbar currency tracking engine
- */
 function calculateProfessionMargins() {
     const oldCurrency = currentCurrency;
     currentCurrency = localStorage.getItem('fiq_currency') || 'USD';
@@ -337,7 +335,6 @@ function calculateProfessionMargins() {
     calculateNetProfit();
 }
 
-// Tab Switching Event Mapping Architecture
 const tabButtons = document.querySelectorAll('.category-btn');
 tabButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -366,13 +363,11 @@ tabButtons.forEach(button => {
     });
 });
 
-// Trigger initial baseline initialization runtime stack loops
 document.addEventListener('DOMContentLoaded', () => {
     renderDynamicForm(currentProfession, false);
     calculateNetProfit();
 });
 
-// Sync from Navbar dropdown alterations
 window.addEventListener('storage', (e) => {
     if (e.key === 'fiq_currency') {
         calculateProfessionMargins();

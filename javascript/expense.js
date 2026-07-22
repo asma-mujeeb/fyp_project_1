@@ -7,6 +7,17 @@ const currencySigns = { USD: '$', PKR: '₨', GBP: '£', EUR: '€', AED: 'د.إ
 
 let currentCurrency = localStorage.getItem('fiq_currency') || 'USD';
 
+function attachZeroFocusHandling(input) {
+    if (!input.placeholder) input.placeholder = "0";
+    input.addEventListener('focus', function () {
+        if (this.value === '0') {
+            this.value = '';
+        } else {
+            this.select();
+        }
+    });
+}
+
 function calculateExpenses() {
     currentCurrency = localStorage.getItem('fiq_currency') || "USD";
     
@@ -25,11 +36,20 @@ function calculateExpenses() {
         maximumFractionDigits: fractionDigits
     });
 
-    document.getElementById('exp-total').textContent = sign + ' ' + formattedTotal;
-    document.getElementById('exp-result').classList.remove('hidden');
+    const expTotalEl = document.getElementById('exp-total');
+    if (expTotalEl) {
+        expTotalEl.textContent = sign + ' ' + formattedTotal;
+    }
 }
 
-// Global hook listener matching Navbar dropdown transitions
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.exp-input').forEach(input => {
+        attachZeroFocusHandling(input);
+        input.addEventListener('input', calculateExpenses);
+    });
+    calculateExpenses();
+});
+
 window.addEventListener('storage', (e) => {
     if (e.key === 'fiq_currency') {
         const oldCurrency = currentCurrency;
@@ -37,7 +57,6 @@ window.addEventListener('storage', (e) => {
 
         const conversionFactor = exchangeRates[currentCurrency] / exchangeRates[oldCurrency];
 
-        // Loop through and scale all individual custom line items automatically
         const allInputs = document.querySelectorAll('.exp-input');
         allInputs.forEach(input => {
             if (input && input.value) {
@@ -45,8 +64,6 @@ window.addEventListener('storage', (e) => {
             }
         });
 
-        if (!document.getElementById('exp-result').classList.contains('hidden')) {
-            calculateExpenses();
-        }
+        calculateExpenses();
     }
 });

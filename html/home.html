@@ -20,17 +20,6 @@
       margin: 0;
       padding: 0;
     }
-    .brand {
-      font-weight: bold;
-      color: var(--primary-color) !important;
-    }
-    .brand span {
-      color: #D81B60;
-    }
-    .tab.active {
-      border-bottom: 3px solid var(--primary-color) !important;
-      color: var(--primary-color) !important;
-    }
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -107,10 +96,10 @@
 </head>
 <body>
 
-  <nav class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 50px; background: white; border-bottom: 1px solid rgba(125, 34, 77, 0.1);">
-    <div style="display: flex; align-items: center; gap: 30px;">
-      <div class="brand">Freelance<span>IQ</span></div>
-      <div style="display: flex; gap: 15px;">
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="home.html">Freelance<span>IQ</span></a>
+      <div class="nav-links">
         <a class="tab active" href="home.html">Home</a>
         <a class="tab" href="calculator.html">Calculators</a>
         <a class="tab" href="expense.html">Expenses</a>
@@ -120,9 +109,9 @@
       </div>
     </div>
 
-    <div class="currency-nav-wrap" style="font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; background: #FFF0F5; padding: 6px 12px; border-radius: 8px;">
-      <span style="color: var(--primary-color); font-size: 12px; font-weight: 600;">Currency:</span>
-      <select id="globalCurrencySelect" style="background: transparent; border: none; font-weight: 700; color: var(--primary-color); cursor: pointer; outline: none;">
+    <div class="currency-nav-wrap no-print">
+      <span class="currency-label">CURRENCY:</span>
+      <select id="globalCurrencySelect">
         <option value="USD">USD ($)</option>
         <option value="PKR">PKR (₨)</option>
         <option value="GBP">GBP (£)</option>
@@ -175,14 +164,17 @@
     </footer>
   </div>
 
+  <script src="../javascript/home.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const dropdown = document.getElementById("globalCurrencySelect");
-      dropdown.value = localStorage.getItem("fiq_currency") || "USD";
-      dropdown.addEventListener("change", (e) => {
-        localStorage.setItem("fiq_currency", e.target.value);
-        window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
-      });
+      if (dropdown) {
+        dropdown.value = localStorage.getItem("fiq_currency") || "USD";
+        dropdown.addEventListener("change", (e) => {
+          localStorage.setItem("fiq_currency", e.target.value);
+          window.dispatchEvent(new StorageEvent('storage', { key: 'fiq_currency', newValue: e.target.value }));
+        });
+      }
     });
   </script>
 </body>

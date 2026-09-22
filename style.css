@@ -3,7 +3,6 @@
    Removes default browser styles so every browser
    looks the same. Always put this at the very top.
 ===================================================== */
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,13 +15,14 @@ body {
   color: #222222;
   font-size: 14px;
   line-height: 1.5;
-  padding-top: 55px; /* Offset for compact fixed navbar */
+  padding-top: 75px; /* Offset for fixed navbar */
 }
+
 
 /* =====================================================
    SECTION 2: NAVBAR
    The top navigation bar — appears on ALL 6 pages.
-   Uses display:flex to put items in a horizontal row.
+   Stabilized with a fixed height and horizontal scroll container to prevent wrapping.
 ===================================================== */
 .navbar {
   background-color: #ffffff;
@@ -30,40 +30,50 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  padding: 0 30px;
-  flex-wrap: wrap;
+  padding: 0 40px;
+  flex-wrap: nowrap;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: 75px;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: all 0.3s ease;
-  min-height: 50px;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
   gap: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-grow: 1;
+  scrollbar-width: none;
+}
+
+.nav-left::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-links {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .brand {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 700;
   color: #1f2937;
-  padding: 10px 0;
-  margin-right: 24px;
+  padding: 16px 0;
+  margin-right: 20px;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 8px;
   letter-spacing: -0.5px;
+  flex-shrink: 0;
 }
 
 .brand span {
@@ -71,10 +81,10 @@ body {
 }
 
 .tab {
-  padding: 14px 12px;
+  padding: 10px 14px;
   cursor: pointer;
   color: #4b5563;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   border-bottom: 3px solid transparent;
   transition: all 0.2s ease;
@@ -93,17 +103,19 @@ body {
   font-weight: 600;
 }
 
+/* Premium Navigation Currency Selector Dropdown Wrapper Node */
 .currency-nav-wrap {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background-color: #f3f4f6;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
   border: 1px solid #e5e7eb;
   transition: border-color 0.2s ease;
+  flex-shrink: 0;
 }
 
 .currency-nav-wrap:hover {
@@ -127,7 +139,6 @@ body {
   cursor: pointer;
   outline: none;
   font-variant-numeric: tabular-nums;
-  font-size: 12px;
 }
 
 #globalCurrencySelect option {
@@ -137,23 +148,26 @@ body {
 
 
 /* =====================================================
-   SECTION 3: PAGE WRAPPER
+   SECTION 3: PAGE WRAPPER / CONTAINER
    Centers content and adds padding on all pages.
 ===================================================== */
-.page-wrap {
+.page-wrap,
+.container {
   padding: 32px 24px;
   max-width: 980px;
   margin: 0 auto;
 }
 
-.page-title {
+.page-title,
+h2 {
   font-size: 24px;
   font-weight: 700;
   color: #111111;
   margin-bottom: 6px;
 }
 
-.page-sub {
+.page-sub,
+.subtitle {
   font-size: 13px;
   color: #777777;
   margin-bottom: 28px;
@@ -164,7 +178,8 @@ body {
    SECTION 4: CARDS
    White rounded boxes used everywhere.
 ===================================================== */
-.card {
+.card,
+.calculator-card {
   background-color: #ffffff;
   border: 1px solid #e8e8e8;
   border-radius: 14px;
@@ -173,20 +188,24 @@ body {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
-.card-title {
+.card-title,
+.calculator-header {
   font-size: 15px;
   font-weight: 700;
   color: #111111;
   margin-bottom: 18px;
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 12px;
 }
 
 
 /* =====================================================
    SECTION 5: GRID LAYOUTS
 ===================================================== */
-.grid-2 {
+.grid-2,
+.grid-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 20px;
 }
 
@@ -196,31 +215,33 @@ body {
   gap: 16px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .navbar {
-    padding: 10px 16px;
+    padding: 0 16px;
   }
-  .currency-nav-wrap {
-    margin: 8px 0;
-    width: 100%;
-    justify-content: space-between;
+  .brand {
+    margin-right: 12px;
+    font-size: 18px;
   }
   .grid-2,
-  .grid-3 {
+  .grid-3,
+  .grid-layout {
     grid-template-columns: 1fr;
   }
 }
 
 
 /* =====================================================
-   SECTION 6: FORM FIELDS
+   SECTION 6: FORM FIELDS & CONTROLS
    Supports both static and dynamic form field nodes perfectly.
 ===================================================== */
-.field, .form-group {
+.field,
+.form-group {
   margin-bottom: 16px;
 }
 
-.field label, .form-group label {
+.field label,
+.form-group label {
   display: block;
   font-size: 12px;
   color: #666666;
@@ -228,7 +249,10 @@ body {
   font-weight: 500;
 }
 
-.field input, .field select, .form-group input {
+.field input,
+.field select,
+.form-group input,
+.form-control {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #dddddd;
@@ -237,12 +261,17 @@ body {
   color: #222222;
   background-color: #ffffff;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
-.field input:focus, .field select:focus, .form-group input:focus {
+.field input:focus,
+.field select:focus,
+.form-group input:focus,
+.form-control:focus {
   outline: none;
   border-color: #1D9E75;
   box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+  background-color: #ffffff;
 }
 
 
@@ -273,13 +302,17 @@ body {
 
 
 /* =====================================================
-   SECTION 8: RESULT BOX
+   SECTION 8: RESULT BOX & PANELS
 ===================================================== */
-.result-box {
+.result-box,
+.results-panel {
   background-color: #f8faf9;
   border: 1px solid #d8ede6;
   border-radius: 12px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .result-row {
@@ -289,32 +322,41 @@ body {
   padding: 9px 0;
   border-bottom: 1px solid #ececec;
   font-size: 13px;
+  color: #666666;
 }
 
-.result-row:last-child {
+.result-row:last-child,
+.result-row.total {
   border-bottom: none;
   font-weight: 700;
   font-size: 16px;
   padding-top: 14px;
+  color: #222222;
 }
 
 .result-row .lbl {
   color: #666666;
 }
 
+.text-success {
+  color: #1D9E75 !important;
+}
+
 
 /* =====================================================
-   SECTION 9: PROFESSION BUTTONS
+   SECTION 9: PROFESSION BUTTONS & CATEGORIES
    Used in: calculator.html
 ===================================================== */
-.prof-grid {
+.prof-grid,
+.categories {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 8px;
   margin-bottom: 24px;
 }
 
-.prof-btn {
+.prof-btn,
+.category-btn {
   background-color: #f4f6f8;
   border: 1px solid #e0e0e0;
   border-radius: 9px;
@@ -327,13 +369,15 @@ body {
   font-weight: 500;
 }
 
-.prof-btn:hover {
+.prof-btn:hover,
+.category-btn:hover {
   background-color: #eaf5f1;
   color: #0F6E56;
   border-color: #a8dcc8;
 }
 
-.prof-btn.active {
+.prof-btn.active,
+.category-btn.active {
   background-color: #e1f5ee;
   color: #0F6E56;
   border-color: #5DCAA5;
@@ -570,11 +614,12 @@ body {
   .navbar, .btn, #download-btn, .card, .page-title, .page-sub { 
     display: none !important; 
   }
-  .grid-2 {
+  .grid-2,
+  .grid-layout {
     display: block !important;
     width: 100% !important;
   }
-  body, .page-wrap {
+  body, .page-wrap, .container {
     background: #fff !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -588,6 +633,7 @@ body {
     display: block !important;
   }
 }
+
 /* =====================================================
    SECTION 16: DYNAMIC INVOICE LINE ITEMS 
    Appends cleanly to manage row spacing and item states
@@ -607,7 +653,6 @@ body {
   background-color: #ffffff;
 }
 
-/* Redesigned trash button utilizing your font-awesome package */
 .invoice-item-row .remove-item-btn {
   background-color: #f3f4f6;
   color: #4b5563;
@@ -630,7 +675,6 @@ body {
   border-color: #fca5a5;
 }
 
-/* Styled real-time array limit error feedback */
 .msg-limit {
   color: #d97706;
   font-size: 12px;
@@ -639,7 +683,21 @@ body {
   display: block;
 }
 
-/* Extra table layout tuning for complex items inside preview pane */
 #p-invoice-items-body td {
   word-break: break-word;
+}
+/* =====================================================
+   SECTION 17: FORM RESTRICTION & VALIDATION STYLES
+===================================================== */
+.field-error-msg {
+  display: none;
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
 }
